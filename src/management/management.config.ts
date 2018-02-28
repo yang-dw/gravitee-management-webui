@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function config ($logProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider, $permissionProvider) {
+function config ($logProvider: any, $urlRouterProvider: ng.ui.IUrlRouterProvider, $permissionProvider: any) {
   'ngInject';
   // Enable log
   $logProvider.debugEnabled(false);

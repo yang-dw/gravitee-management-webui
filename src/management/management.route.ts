@@ -18,6 +18,7 @@ import AuditService from "../services/audit.service";
 import ApiService from "../services/api.service";
 import ApplicationService from "../services/applications.service";
 import {User} from "../entities/user";
+import {IScope} from "angular";
 
 function managementRouterConfig($stateProvider: ng.ui.IStateProvider) {
   'ngInject';
@@ -26,7 +27,9 @@ function managementRouterConfig($stateProvider: ng.ui.IStateProvider) {
       url: '/management',
       redirectTo: 'management.apis.list',
       parent: 'withSidenav',
-      controller: function ($rootScope, Constants) {
+      controller: function (
+        $rootScope: IScope,
+        Constants: any) {
         $rootScope.portalTitle = Constants.managementTitle;
       }
     })
@@ -61,8 +64,10 @@ function managementRouterConfig($stateProvider: ng.ui.IStateProvider) {
       url: '/:instanceId',
       component: 'instance',
       resolve: {
+        /* tslint:disable:no-string-literal */
         instance: ($stateParams: ng.ui.IStateParamsService, InstancesService: InstancesService) =>
           InstancesService.get($stateParams['instanceId']).then(response => response.data)
+        /* tslint:enable:no-string-literal */
       }
     })
     .state('management.instances.detail.environment', {
@@ -91,8 +96,10 @@ function managementRouterConfig($stateProvider: ng.ui.IStateProvider) {
         }
       },
       resolve: {
+        /* tslint:disable:no-string-literal */
         monitoringData: ($stateParams: ng.ui.IStateParamsService, InstancesService: InstancesService, instance: any) =>
           InstancesService.getMonitoringData($stateParams['instanceId'], instance.id).then(response => response.data)
+        /* tslint:enable:no-string-literal */
       }
     })
     .state('management.platform', {

@@ -16,6 +16,8 @@
 import * as _ from 'lodash';
 
 import UserService from '../../services/user.service';
+import ApiService from "../../services/api.service";
+import {IScope} from "angular";
 
 export class ApisController {
 
@@ -31,11 +33,11 @@ export class ApisController {
   private portalTitle: string;
   private selectedApis: any[];
 
-  constructor(private ApiService,
-              private $mdDialog,
-              private $scope,
+  constructor(private ApiService: ApiService,
+              private $mdDialog: angular.material.IDialogService,
+              private $scope: IScope,
               private $state: ng.ui.IStateService,
-              private Constants,
+              private Constants: any,
               private Build,
               private resolvedApis,
               private UserService: UserService,

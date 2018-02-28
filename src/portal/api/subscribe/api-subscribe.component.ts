@@ -43,7 +43,7 @@ const ApiSubscribeComponent: ng.IComponentOptions = {
       private NotificationService: NotificationService,
       private ApplicationService: ApplicationService,
       private ApiService: ApiService,
-      private Constants,
+      private Constants: any,
       private $translate) {
       'ngInject';
     }

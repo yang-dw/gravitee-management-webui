@@ -14,33 +14,37 @@
  * limitations under the License.
  */
 import * as _ from 'lodash';
+import {IHttpPromise} from "angular";
+
 class TopApiService {
   private topApisURL: string;
 
-  constructor(private $http, Constants) {
+  constructor(
+    private $http: ng.IHttpService,
+    Constants: any) {
     'ngInject';
     this.topApisURL = `${Constants.baseURL}configuration/top-apis/`;
   }
 
-  list() {
+  list(): IHttpPromise<any> {
     return this.$http.get(this.topApisURL);
   }
 
-  create(topApi) {
+  create(topApi: any): IHttpPromise<any> {
     if (topApi) {
       return this.$http.post(this.topApisURL, {api: topApi.id});
     }
   }
 
-  update(topApis) {
+  update(topApis: any[]): IHttpPromise<any> {
     if (topApis && topApis.length) {
-      return this.$http.put(this.topApisURL, _.map(topApis, function (topApi:any) {
+      return this.$http.put(this.topApisURL, _.map(topApis, function (topApi: any) {
         return {api: topApi.api};
       }));
     }
   }
 
-  delete(topApi) {
+  delete(topApi: any): IHttpPromise<any> {
     if (topApi) {
       return this.$http.delete(this.topApisURL + topApi.api);
     }

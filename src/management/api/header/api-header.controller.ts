@@ -18,6 +18,8 @@ import ApiService from '../../../services/api.service';
 import angular = require('angular');
 
 import _ = require('lodash');
+import {IScope} from "angular";
+
 class ApiHeaderController {
   public api: any;
   public apiEnabled: boolean;
@@ -25,7 +27,7 @@ class ApiHeaderController {
   constructor(private ApiService: ApiService,
               private NotificationService: NotificationService,
               private $mdDialog: angular.material.IDialogService,
-              private $rootScope) {
+              private $rootScope: IScope) {
     'ngInject';
   }
 
@@ -66,7 +68,7 @@ class ApiHeaderController {
           });
         }
       }
-    })
+    });
   }
 
 }

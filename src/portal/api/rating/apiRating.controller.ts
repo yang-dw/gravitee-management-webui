@@ -17,6 +17,7 @@ import ApiService from '../../../services/api.service';
 import NotificationService from '../../../services/notification.service';
 import _ = require('lodash');
 import UserService from "../../../services/user.service";
+import {IScope} from "angular";
 
 class ApiPortalRatingController {
   private api: any;
@@ -28,10 +29,10 @@ class ApiPortalRatingController {
 
   constructor(private NotificationService: NotificationService,
               private ApiService: ApiService,
-              private $scope,
-              private $mdDialog,
-              private $state,
-              private Constants,
+              private $scope: IScope,
+              private $mdDialog: angular.material.IDialogService,
+              private $state: ng.ui.IStateService,
+              private Constants: any,
               private UserService: UserService) {
     'ngInject';
 
@@ -42,7 +43,7 @@ class ApiPortalRatingController {
 
   $onInit() {
     if (!this.rating) {
-      this.rating = {rate: 0}
+      this.rating = {rate: 0};
     }
 
     let pageNumbers = _.range(1, _.ceil(this.ratings.totalElements / 10) + 1);
@@ -52,7 +53,7 @@ class ApiPortalRatingController {
     };
   }
 
-  setPage(pageNumber) {
+  setPage(pageNumber: number) {
     this.$state.go(this.$state.current, {pageNumber: pageNumber});
   }
 
@@ -84,10 +85,12 @@ class ApiPortalRatingController {
       this.rating = response.data;
       this.$onInit();
     });
+    /* tslint:disable:no-string-literal */
     this.ApiService.getApiRatings(this.api.id, this.$state.params['pageNumber']).then((response) => {
       this.ratings = response.data;
       this.$onInit();
     });
+    /* tslint:enable:no-string-literal */
     this.$scope.$emit('onRatingSave');
   }
 
@@ -95,7 +98,7 @@ class ApiPortalRatingController {
     return (this.rating && this.rating.id && !this.rating.title) || this.formRating.$dirty;
   }
 
-  createAnswer(ratingId) {
+  createAnswer(ratingId: string) {
     this.ApiService.createRatingAnswer(this.api.id, ratingId, this.ratingAnswer).then(() => {
       delete this.ratingAnswer;
       this.onModification();
@@ -103,9 +106,12 @@ class ApiPortalRatingController {
     });
   }
 
-  delete(ratingId, answer) {
+  delete(ratingId: string, answer: any) {
     this.$mdDialog.show({
-      controller: function ($scope, $mdDialog, answer) {
+      controller: function (
+        $scope: IScope,
+        $mdDialog: angular.material.IDialogService,
+        answer: any) {
         'ngInject';
         $scope.answer = answer;
 
@@ -150,7 +156,7 @@ class ApiPortalRatingController {
     });
   }
 
-  isUserHasPermissions(permission) {
+  isUserHasPermissions(permission: string) {
     return this.UserService.isUserHasPermissions([permission]);
   }
 }

@@ -33,7 +33,7 @@ export class PortalApisController {
                private $scope: IScope,
                private $state,
                private $stateParams,
-               private Constants,
+               private Constants: any,
                private ViewService: ViewService,
                private ApiService: ApiService,
                private $window) {

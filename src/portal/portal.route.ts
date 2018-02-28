@@ -63,7 +63,7 @@ function portalRouterConfig($stateProvider: ng.ui.IStateProvider) {
       controller: 'PortalApisController',
       controllerAs: 'apisCtrl',
       resolve: {
-        resolvedApis: function ($stateParams, ApiService, ViewService: ViewService) {
+        resolvedApis: function ($stateParams: ng.ui.IStateParamsService, ApiService: ApiService, ViewService: ViewService) {
           if ($stateParams.view) {
             return ApiService.list($stateParams.view);
           }
@@ -96,8 +96,8 @@ function portalRouterConfig($stateProvider: ng.ui.IStateProvider) {
             ? ApiService.getApiRatingSummaryByApi($stateParams['apiId']).then(response => response.data)
             : null;
         },
-        resolvedApiPermissions: (ApiService, $stateParams) => ApiService.getPermissions($stateParams.apiId),
-        onEnter: function (UserService, resolvedApiPermissions) {
+        resolvedApiPermissions: (ApiService: ApiService, $stateParams: ng.ui.IStateParamsService) => ApiService.getPermissions($stateParams.apiId),
+        onEnter: function (UserService: UserService, resolvedApiPermissions: any) {
           if (!UserService.currentUser.userApiPermissions) {
             UserService.currentUser.userApiPermissions = [];
             _.forEach(_.keys(resolvedApiPermissions.data), function (permission) {

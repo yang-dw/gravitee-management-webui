@@ -27,7 +27,7 @@ class AuthenticationService {
 
   constructor(
     private $auth: AuthProvider,
-    private Constants) {
+    private Constants: any) {
     'ngInject';
 
     if (Constants.authentication) {

@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 import UserService from './services/user.service';
-import LoginController from './user/login/login.controller';
-import { User } from './entities/user';
+import {User} from './entities/user';
 import {IScope} from 'angular';
 
 function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
@@ -113,8 +112,8 @@ function routerConfig($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: 
             $rootScope.$broadcast('graviteeUserRefresh');
             $rootScope.$broadcast('graviteeUserCancelScheduledServices');
             if ((Constants.authentication && Constants.authentication.oauth2.userLogoutEndpoint) || false) {
-              var redirectUri = encodeURIComponent(window.location.origin + (window.location.pathname == '/' ? '' : window.location.pathname));
-              $window.location.href= Constants.authentication.oauth2.userLogoutEndpoint + "?redirect_uri=" + redirectUri;
+              var redirectUri = encodeURIComponent(window.location.origin + (window.location.pathname === '/' ? '' : window.location.pathname));
+              $window.location.href = Constants.authentication.oauth2.userLogoutEndpoint + "?redirect_uri=" + redirectUri;
             }
           }
         );

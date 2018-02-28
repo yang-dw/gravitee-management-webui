@@ -15,13 +15,21 @@
  */
 /* global setInterval:false, clearInterval:false, screen:false */
 import UserService from '../services/user.service';
-import _ = require('lodash');
+import {IHttpService, IScope, ITimeoutService, IWindowService} from "angular";
 
-function runBlock($rootScope, $window, $http, $mdSidenav, $transitions,
-                  $timeout, UserService: UserService, Constants, PermissionStrategies) {
+function runBlock(
+  $rootScope: IScope,
+  $window: IWindowService,
+  $http: IHttpService,
+  $mdSidenav: angular.material.ISidenavService,
+  $transitions: any,
+  $timeout: ITimeoutService,
+  UserService: UserService,
+  Constants: any,
+  PermissionStrategies: any) {
   'ngInject';
 
-  $transitions.onStart({ to: (state) => state.name !== 'login' && state.name !== 'registration'}, function(trans) {
+  $transitions.onStart({ to: (state) => state.name !== 'login' && state.name !== 'registration'}, function(trans: any) {
     let forceLogin = (Constants.authentication && Constants.authentication.forceLogin) || false;
 
     if (forceLogin &&  ! UserService.isAuthenticated()) {
@@ -29,7 +37,7 @@ function runBlock($rootScope, $window, $http, $mdSidenav, $transitions,
     }
   });
 
-  $transitions.onFinish({}, function (trans) {
+  $transitions.onFinish({}, function (trans: any) {
     let fromState = trans.from();
     let toState = trans.to();
 
@@ -44,14 +52,14 @@ function runBlock($rootScope, $window, $http, $mdSidenav, $transitions,
   });
 
   $rootScope.$on('graviteeLogout', function () {
-    //TODO: to delete ? What is this sidenav ?
-    //$mdSidenav('left').close();
+    // TODO: to delete ? What is this sidenav ?
+    // $mdSidenav('left').close();
     $window.location.href = $window.location.pathname;
   });
 
   $rootScope.$watch(function () {
     return $http.pendingRequests.length > 0;
-  }, function (hasPendingRequests) {
+  }, function (hasPendingRequests: boolean) {
     $rootScope.isLoading = hasPendingRequests;
   });
 

@@ -17,6 +17,10 @@ import angular = require('angular');
 import _ = require('lodash');
 import ApiService from '../../../services/api.service';
 import UserService from "../../../services/user.service";
+import {IScope} from "angular";
+import GroupService from "../../../services/group.service";
+import RoleService from "../../../services/role.service";
+import NotificationService from "../../../services/notification.service";
 
 class ApiMembersController {
   private api: any;
@@ -31,17 +35,16 @@ class ApiMembersController {
   private displayGroups: any;
   constructor (
     private ApiService: ApiService,
-    private resolvedApi,
-    private resolvedMembers,
-    private resolvedGroups,
-    private $state,
+    private resolvedApi: any,
+    private resolvedMembers: any,
+    private resolvedGroups: any[],
+    private $state: ng.ui.IStateService,
     private $mdDialog: ng.material.IDialogService,
-    private NotificationService,
-    private $scope,
+    private NotificationService: NotificationService,
+    private $scope: IScope,
     private UserService: UserService,
-    private GroupService,
-    private RoleService,
-    private Constants
+    private GroupService: GroupService,
+    private RoleService: RoleService,
   ) {
     'ngInject';
     this.api = resolvedApi.data;

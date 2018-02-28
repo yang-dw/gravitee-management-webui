@@ -13,11 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function delegatorConfig($sceDelegateProvider, Constants) {
+import {ISCEDelegateProvider} from "angular";
+
+function delegatorConfig(
+  $sceDelegateProvider: ISCEDelegateProvider,
+  Constants: any) {
   'ngInject';
   $sceDelegateProvider.resourceUrlWhitelist([
     'self',
-    Constants.baseURL+'**'
+    Constants.baseURL + '**'
   ]);
 }
 

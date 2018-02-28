@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {IQService, IScope} from "angular";
+
 class UserAvatarDirective {
 
   constructor() {
@@ -51,7 +53,9 @@ class UserAvatarDirective {
 }
 
 class UserAvatarController {
-  constructor(private $scope, private $q, private Constants) {
+  constructor(private $scope: IScope,
+              private $q: IQService,
+              private Constants: any) {
     'ngInject';
   }
 }

@@ -22,7 +22,7 @@ class TaskService {
   private URL: string;
   private Constants: any;
 
-  constructor(private $http: ng.IHttpService, Constants) {
+  constructor(private $http: ng.IHttpService, Constants: any) {
     'ngInject';
     this.Constants = Constants;
     this.URL = this.Constants.baseURL+"user/tasks";

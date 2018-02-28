@@ -13,7 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function DeleteTopApiDialogController($scope, $mdDialog, topApi, TopApiService, NotificationService) {
+import NotificationService from "../../../../services/notification.service";
+import TopApiService from "../../../../services/top-api.service";
+import {IScope} from "angular";
+
+function DeleteTopApiDialogController(
+  $scope: IScope,
+  $mdDialog: angular.material.IDialogService,
+  topApi: any,
+  TopApiService: TopApiService,
+  NotificationService: NotificationService) {
   'ngInject';
 
   $scope.topApi = topApi;

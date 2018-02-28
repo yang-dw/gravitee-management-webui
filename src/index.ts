@@ -38,7 +38,7 @@ function fetchData() {
     angular.module('gravitee-portal').constant('Constants', constants);
     angular.module('gravitee-portal').constant('Build', responses[1].data);
 
-    if(constants.theme.css) {
+    if (constants.theme.css) {
       const link = document.createElement("link");
       link.rel = "stylesheet";
       link.type = "text/css";

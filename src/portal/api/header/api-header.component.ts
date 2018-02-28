@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import ApiService from "../../../services/api.service";
+import {IScope} from "angular";
 
 const ApiHeaderComponent: ng.IComponentOptions = {
   bindings: {
@@ -21,7 +22,12 @@ const ApiHeaderComponent: ng.IComponentOptions = {
     apiRatingSummary: '<'
   },
   template: require('./api-header.html'),
-  controller: function(Constants, ApiService: ApiService, $state, $stateParams, $rootScope) {
+  controller: function(
+    Constants: any,
+    ApiService: ApiService,
+    $state: ng.ui.IStateService,
+    $stateParams: ng.ui.IStateParamsService,
+    $rootScope: IScope) {
     'ngInject';
     this.ratingEnabled = ApiService.isRatingEnabled();
 

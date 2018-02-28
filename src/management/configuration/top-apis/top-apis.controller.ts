@@ -15,11 +15,15 @@
  */
 import * as _ from 'lodash';
 import TopApiService from '../../../services/top-api.service';
+import NotificationService from "../../../services/notification.service";
 
 class TopApisController {
   private topApis: any[];
 
-  constructor(private TopApiService: TopApiService, private $mdDialog: angular.material.IDialogService, private NotificationService) {
+  constructor(
+    private TopApiService: TopApiService,
+    private $mdDialog: angular.material.IDialogService,
+    private NotificationService: NotificationService) {
     'ngInject';
   }
 
@@ -44,7 +48,7 @@ class TopApisController {
     });
   }
 
-  delete(topApi) {
+  delete(topApi: any) {
     this.$mdDialog.show({
       controller: 'DeleteTopApiDialogController',
       template: require('./dialog/delete.top-api.dialog.html'),
@@ -58,19 +62,19 @@ class TopApisController {
     });
   }
 
-  upward(order) {
+  upward(order: number) {
     if (order > 0) {
       this.reorder(order, order - 1);
     }
   }
 
-  downward(order) {
+  downward(order: number) {
     if (order < _.size(this.topApis) - 1) {
       this.reorder(order, order + 1);
     }
   }
 
-  private reorder(from, to) {
+  private reorder(from: number, to: number) {
     this.topApis[from].order = to;
     this.topApis[to].order = from;
     this.topApis = _.sortBy(this.topApis, 'order');

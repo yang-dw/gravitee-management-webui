@@ -24,7 +24,7 @@ export class HomeController {
   constructor ( private resolvedApis,
                 private $state,
                 private resolvedHomepage,
-                private Constants,
+                private Constants: any,
                 private ApiService: ApiService) {
     'ngInject';
     this.apis = resolvedApis.data;

@@ -27,7 +27,7 @@ function interceptorConfig(
   var sessionExpired;
 
   var interceptorUnauthorized = ($q: angular.IQService, $injector: angular.auto.IInjectorService): angular.IHttpInterceptor => ({
-    responseError: function (error) {
+    responseError: function (error: any) {
       if (error.config && !error.config.tryItMode) {
         var unauthorizedError = !error || error.status === 401;
         var errorMessage = '';
@@ -64,14 +64,14 @@ function interceptorConfig(
 
   var interceptorTimeout = function ($q: angular.IQService, $injector: angular.auto.IInjectorService): angular.IHttpInterceptor {
     return {
-      request: function (config) {
+      request: function (config: any) {
         // Use defined HTTP timeout or default value
         config.timeout = config.timeout || 10000;
         return config;
       },
-      responseError: function (error) {
+      responseError: function (error: any) {
         const notificationService = ($injector.get('NotificationService') as NotificationService);
-        if(error.config && !error.config.tryItMode) {
+        if (error.config && !error.config.tryItMode) {
           if (error && error.status <= 0) {
             notificationService.showError('Server unreachable');
           }
