@@ -22,7 +22,6 @@ import {IScope} from "angular";
 export class ApisController {
 
   private apisProvider: any;
-  private apis: any;
   private graviteeUIVersion: string;
   private apisScrollAreaHeight: number;
   private isAPIsHome: boolean;
@@ -41,8 +40,7 @@ export class ApisController {
               private Build,
               private resolvedApis,
               private UserService: UserService,
-              private graviteeUser,
-              private $filter) {
+              private graviteeUser) {
     'ngInject';
 
     this.graviteeUser = graviteeUser;
@@ -97,7 +95,9 @@ export class ApisController {
       controller: 'DialogApiImportController',
       controllerAs: 'dialogApiImportCtrl',
       template: require('./general/dialog/apiImport.dialog.html'),
-      apiId: '',
+      locals: {
+        apiId: ''
+      },
       clickOutsideToClose: true
     }).then(function (response) {
       if (response) {
